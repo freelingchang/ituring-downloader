@@ -54,8 +54,7 @@ class Book:
     
     def downloadBook(self,bookId):
         bookName = self.getBookName(bookId)
-        bookName = bookName.split(":")[0]
-        bookName = bookName.split("：")[0]
+        bookName = bookName.replace("/","")
         filePath = os.path.join(DATADIR,bookName+".pdf")
         if os.path.exists(filePath):
             print(filePath)
