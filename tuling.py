@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python36
 import requests
 import re
 import os
@@ -50,6 +50,7 @@ class Book:
     def downloadBook(self,bookId):
         bookName = self.getBookName(bookId)
         bookName = bookName.split(":")[0]
+        bookName = bookName.split("：")[0]
         filePath = os.path.join(DATADIR,bookName+".pdf")
         if os.path.exists(filePath):
             print(filePath)
