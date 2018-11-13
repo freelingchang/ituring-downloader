@@ -3,6 +3,7 @@ import requests
 import re
 import os
 import time
+import sys
 
 DATADIR='/tmp/book'
 
@@ -22,6 +23,7 @@ class Book:
             cookies[k] = v
         self.cookies = cookies
         return cookies
+
     def __init__(self):
         self.get_cookie()
     
@@ -45,6 +47,9 @@ class Book:
         r = requests.get(bookPage,headers= headers,cookies=self.cookies)
         regx = '<a href="/file/ebook/(\d+)\?type=PDF">'
         pdfId = re.findall(regx,r.text)
+        if not pdfId:
+            print("全部下载完毕了,下面是纸质书，结束下载")
+            sys.exit(0)
         return pdfId[0]
     
     def downloadBook(self,bookId):
